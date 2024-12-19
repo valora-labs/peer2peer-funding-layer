@@ -15,7 +15,7 @@ error InvalidAmount();
 using ECDSA for bytes32;
 using MessageHashUtils for bytes32;
 
-contract WalletJumpstart {
+contract WalletJumpstartHack {
   struct ERC20Claim {
     IERC20 token;
     address depositor;
