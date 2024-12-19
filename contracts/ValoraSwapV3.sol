@@ -18,7 +18,8 @@ contract ValoraSwapV3 is Pausable, Ownable2Step {
 
   event SwapFromReferral(
     uint256 fee,
-    address referrer
+    address referrer,
+    address referee
   );
 
   constructor(
@@ -69,6 +70,6 @@ contract ValoraSwapV3 is Pausable, Ownable2Step {
       FEE_WALLET,
       fee
     );
-    emit SwapFromReferral(fee, referrer);
+    emit SwapFromReferral(fee, referrer, msg.sender);
   }
 }
