@@ -25,34 +25,19 @@ async function getConfig() {
   }
 }
 
-const CONTRACT_NAME = 'Example'
+const CONTRACT_NAME = 'WalletJumpstartHack'
 
 async function main() {
-  const config = await getConfig()
   const Contract = await hre.ethers.getContractFactory(CONTRACT_NAME)
 
-  let address: string
 
-  const constructorArgs = ['FOO', 'BAR']
-  if (hre.network.name === 'celo') {
-    console.log(`Deploying ${CONTRACT_NAME} with OpenZeppelin Defender`)
-    const result = await hre.defender.deployContract(
-      Contract,
-      constructorArgs,
-      { salt: config.deploySalt },
-    )
-    address = await result.getAddress()
-  } else {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const constructorArgs: any[] = []
     console.log(`Deploying ${CONTRACT_NAME} with local signer`)
     const result = await Contract.deploy(...constructorArgs)
-    address = await result.getAddress()
+    const address = await result.getAddress()
+    console.log(`Deployed ${CONTRACT_NAME} to ${address}`)
   }
-
-  console.log('\nTo verify the contract, run:')
-  console.log(
-    `yarn hardhat verify ${address} --network ${hre.network.name} ${constructorArgs.join(' ')}`,
-  )
-}
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.

@@ -27,3 +27,10 @@ yarn hardhat run scripts/deploy.ts --network celo
 ```
 
 After this is done, you should see output in your terminal with a command to run to verify the contract on the block explorers.
+
+
+### Contracts
+
+WalletJumpstartHack: [0x4BefF9F9965aca255bF21407169744AbDba853A7](https://celoscan.io/address/0x4BefF9F9965aca255bF21407169744AbDba853A7)
+
+ValoraSwapV3: [0xf679b68dbD919b51B121750C6bebf6E685938982](https://celoscan.io/address/0xf679b68dbD919b51B121750C6bebf6E685938982)

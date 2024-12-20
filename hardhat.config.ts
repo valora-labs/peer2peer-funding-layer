@@ -3,19 +3,30 @@ import '@nomicfoundation/hardhat-ethers'
 import '@nomicfoundation/hardhat-chai-matchers'
 import '@openzeppelin/hardhat-upgrades'
 import { HardhatUserConfig } from 'hardhat/config'
-import { HDAccountsUserConfig } from 'hardhat/types'
+import { HttpNetworkAccountsConfig } from 'hardhat/types'
 import * as dotenv from 'dotenv'
 
 dotenv.config()
 
-const accounts: HDAccountsUserConfig = {
-  mnemonic:
-    process.env.MNEMONIC ||
-    'test test test test test test test test test test test junk',
-}
+// const accounts: HDAccountsUserConfig = {
+//   mnemonic:
+//     process.env.MNEMONIC ||
+//     'test test test test test test test test test test test junk',
+// }
+
+const accounts: HttpNetworkAccountsConfig = [process.env.PRIVATE_KEY] as HttpNetworkAccountsConfig
 
 const config: HardhatUserConfig = {
-  solidity: '0.8.24',
+  solidity: {
+    version: '0.8.24',
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 100,
+      },
+      viaIR: true,
+    },
+  },
   defender: {
     apiKey: process.env.DEFENDER_API_KEY!,
     apiSecret: process.env.DEFENDER_API_SECRET!,
@@ -59,6 +70,10 @@ const config: HardhatUserConfig = {
   sourcify: {
     enabled: true,
   },
+  paths: {
+    sources: './contracts',
+    artifacts: './artifacts',
+  }
 }
 
 export default config
